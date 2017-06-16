@@ -6,15 +6,15 @@
 /*   By: jgaillar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 13:35:17 by jgaillar          #+#    #+#             */
-/*   Updated: 2017/05/27 00:26:53 by jgaillar         ###   ########.fr       */
+/*   Updated: 2017/06/16 02:35:08 by jgaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 
 # define FDF_H
-# define WIDTH 1920
-# define LENGTH 1080
+# define WIDTH 800
+# define LENGTH 600
 # include <math.h>
 # include <sys/types.h>
 # include <sys/uio.h>
@@ -77,21 +77,19 @@ typedef	struct	s_stuff
 	t_pos		pos;
 	char		buf[BUFF_SIZE + 1];
 	int			**array;
-	int			**backup;
 	int			fd;
 }				t_stuff;
 
 void			free_2d(char **array);
-char			*ft_strstrip(char *str, char c);
 void			ft_exit(int code);
 int				img(t_stuff *stuff);
 int				get_next_line(const int fd, char **line);
 size_t			lentab(char *buf);
 int				**malloc2d(t_fdf *fdf);
 int				searchbigline(char *buf);
-void 			putintab(t_stuff *stuff);
+void			putintab(t_stuff *stuff);
 void			init_struct(t_stuff *stuff);
-void			ft_segment(t_stuff stuff);
+void			ft_segment(t_stuff *stuff);
 void			mlx_pixel_put_to_image(t_img img, int x, int y, int color);
 void			*setpoint(t_stuff stuff);
 int				exitreset(int keycode, t_stuff *stuff);
@@ -105,6 +103,6 @@ int				green(int keycode, t_stuff *stuff);
 int				red(int keycode, t_stuff *stuff);
 int				hooks(int keycode, t_stuff *stuff);
 int				controlhelp(int i);
-int				ft_strclen(char *str, char c);
+int				refresh(t_stuff *stuff);
 
 #endif

@@ -16,11 +16,11 @@ int		deplahor(int keycode, t_stuff *stuff)
 {
 	if (keycode == 124)
 	{
-		stuff->fdf.gpadding = (stuff->fdf.gpadding + 2);
+		stuff->fdf.gpadding = (stuff->fdf.gpadding + 5);
 	}
 	if (keycode == 123)
 	{
-		stuff->fdf.gpadding = (stuff->fdf.gpadding - 1);
+		stuff->fdf.gpadding = (stuff->fdf.gpadding - 5);
 	}
 	return (0);
 }
@@ -29,11 +29,11 @@ int		deplaver(int keycode, t_stuff *stuff)
 {
 	if (keycode == 126)
 	{
-		stuff->fdf.hpadding = (stuff->fdf.hpadding - 1);
+		stuff->fdf.hpadding = (stuff->fdf.hpadding - 5);
 	}
 	if (keycode == 125)
 	{
-		stuff->fdf.hpadding = (stuff->fdf.hpadding + 1);
+		stuff->fdf.hpadding = (stuff->fdf.hpadding + 5);
 	}
 	return (0);
 }

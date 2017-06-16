@@ -6,17 +6,16 @@
 /*   By: jgaillar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 13:31:45 by jgaillar          #+#    #+#             */
-/*   Updated: 2017/05/25 13:27:33 by jgaillar         ###   ########.fr       */
+/*   Updated: 2017/06/15 22:26:06 by jgaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int		img(t_stuff *stuff)
+int				refresh(t_stuff *stuff)
 {
+	mlx_destroy_image(stuff->img.mlx_ptr, stuff->img.img_ptr);
 	stuff->img.img_ptr = mlx_new_image(stuff->img.mlx_ptr, WIDTH, LENGTH);
-	if (!(stuff->img.data = (char *)ft_strnew(sizeof(char) * WIDTH * LENGTH * 4)))
-		return (-1);
 	stuff->img.data = mlx_get_data_addr(stuff->img.img_ptr, \
 		&stuff->img.bits_per_pixel, &stuff->img.size_line, &stuff->img.endian);
 	setpoint(*stuff);
@@ -25,7 +24,21 @@ int		img(t_stuff *stuff)
 	return (0);
 }
 
-void		ft_exit(int code)
+int				img(t_stuff *stuff)
+{
+	stuff->img.img_ptr = mlx_new_image(stuff->img.mlx_ptr, WIDTH, LENGTH);
+	if (!(stuff->img.data = (char *)ft_strnew(sizeof(char)\
+		* WIDTH * LENGTH * 4)))
+		return (-1);
+	stuff->img.data = mlx_get_data_addr(stuff->img.img_ptr,\
+		&stuff->img.bits_per_pixel, &stuff->img.size_line, &stuff->img.endian);
+	setpoint(*stuff);
+	mlx_put_image_to_window(stuff->img.mlx_ptr, stuff->img.win_ptr, \
+		stuff->img.img_ptr, 0, 0);
+	return (0);
+}
+
+void			ft_exit(int code)
 {
 	ft_putstr("Error happened: ");
 	ft_putnbr(code);
@@ -33,17 +46,15 @@ void		ft_exit(int code)
 	exit(code);
 }
 
-static void    ft_usage(void)
+static void		ft_usage(void)
 {
 	ft_putendl("Usage: ./fdf <map>");
 	ft_exit(0);
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_stuff stuff;
-	int i;
-	int j;
 
 	if (ac != 2 || !av[1])
 		ft_usage();
@@ -53,20 +64,9 @@ int		main(int ac, char **av)
 	close(stuff.fd);
 	init_struct(&stuff);
 	putintab(&stuff);
-	i = -1;
-	while (++i < stuff.fdf.maxy)
-	{
-		j = -1;
-		while (++j < stuff.fdf.maxx)
-		{
-			ft_putnbr(stuff.array[i][j]);
-			ft_putchar(' ');
-		}
-		ft_putchar('\n');
-	}
 	img(&stuff);
+	controlhelp(0);
 	mlx_hook(stuff.img.win_ptr, 2, (1l << 0), hooks, &stuff);
-	mlx_key_hook(stuff.img.win_ptr, exitreset, &stuff);
 	mlx_loop(stuff.img.mlx_ptr);
 	return (0);
 }

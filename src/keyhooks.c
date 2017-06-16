@@ -21,54 +21,19 @@ int		hooks(int keycode, t_stuff *stuff)
 	blue(keycode, stuff);
 	green(keycode, stuff);
 	red(keycode, stuff);
-	if (stuff->img.img_ptr)
-		mlx_destroy_image(stuff->img.mlx_ptr, stuff->img.img_ptr);
-	img(stuff);
-	mlx_put_image_to_window(stuff->img.mlx_ptr, stuff->img.win_ptr, \
-		stuff->img.img_ptr, 0, 0);
+	exitreset(keycode, stuff);
+	refresh(stuff);
 	return (0);
 }
 
 int		exitreset(int keycode, t_stuff *stuff)
 {
 	if (keycode == 53)
-		exit(0);
-	if (keycode == 15)
 	{
-		if (stuff->img.img_ptr)
-			mlx_destroy_image(stuff->img.mlx_ptr, stuff->img.img_ptr);
-		init_struct(stuff);
-		img(stuff);
+		ft_strdel(&stuff->img.data);
+		exit(0);
 	}
+	if (keycode == 15)
+		init_struct(stuff);
 	return (0);
-}
-
-int     ft_strclen(char *str, char c)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	i = 0;
-	while (str[i++])
-		if (str[i] != c && str[i] != '\n')
-			j++;
-	return (j);
-}
-
-char    *ft_strstrip(char *str, char c)
-{
-	char	*format;
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	if (!(format = (char*)ft_strnew(sizeof(char) * ft_strclen(str, c))))
-		ft_exit(-1);
-	while (str[++i])
-		if (str[i] != c)
-			format[j++] = str[i];
-	format[j] = '\0';
-	return (format);
 }

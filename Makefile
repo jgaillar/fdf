@@ -6,14 +6,14 @@
 #    By: jgaillar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/26 20:10:24 by jgaillar          #+#    #+#              #
-#    Updated: 2017/05/26 20:10:26 by jgaillar         ###   ########.fr        #
+#    Updated: 2017/06/09 00:25:46 by jgaillar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = src/
 
 SRC_NAME = 	colorcontrols.c ft_segment.c keyhooks.c main.c malloc.c movmap.c \
-			parcer.c struct.c controlhelp.c
+			parseur.c struct.c controlhelp.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -23,7 +23,7 @@ NAME = fdf
 
 CC = clang
 
-CCFLAGS = -Wall -Wextra -Werror
+CCFLAGS = -Ofast -Wall -Wextra -Werror
 
 FDFFLAGS = -lmlx -framework OpenGL -framework Appkit
 
