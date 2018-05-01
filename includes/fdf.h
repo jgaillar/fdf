@@ -6,7 +6,7 @@
 /*   By: jgaillar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 13:35:17 by jgaillar          #+#    #+#             */
-/*   Updated: 2017/06/16 02:35:08 by jgaillar         ###   ########.fr       */
+/*   Updated: 2018/05/01 10:54:24 by jgaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <mlx.h>
+# include "../mlx/mlx.h"
 # include <stdlib.h>
 # include "../libft/libft.h"
 
